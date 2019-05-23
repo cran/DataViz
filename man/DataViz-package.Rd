@@ -1,4 +1,4 @@
-\name{DataViz-package}
+	\name{DataViz-package}
 \alias{DataViz-package}
 \alias{DataViz}
 \docType{package}
@@ -20,7 +20,8 @@
 }
 
 \author{
-Timothy Bell
+Timothy Bell \email{horia.yeb@gmail.com}
+Christophe Genolini \email{christophe.genolini@u-paris10.fr}
 
 Maintainer: Timothy Bell <horia.yeb@gmail.com>
 }
