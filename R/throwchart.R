@@ -1,4 +1,4 @@
-throwchart <- function(before, after, col = "#123", id = "", lwd = 2.5, xlim = c(0,0),offSet = 0, webinteract = TRUE){
+throwchart <- function(before, after, col = "#123", id = "", lwd = 2.5, xlim = c(0,0), ylim = c(0,0), offSet = 0, webinteract = TRUE){
   lengthbefore <- NROW(before)
   if(!is_tibble(before)) {
     before <- tibble(before)
@@ -30,8 +30,11 @@ throwchart <- function(before, after, col = "#123", id = "", lwd = 2.5, xlim = c
   {
     if(!is_tibble(xlim)) {
       xlim <- tibble(xlim)
-    }  
-    rcpp_throwchart(before = before, after = after, col = col, id = id, lwd = lwd, xlim = xlim, offSet = offSet, path.package("DataViz"))
+    }
+    if(!is_tibble(ylim)) {
+      ylim <- tibble(ylim)
+    }
+    rcpp_throwchart(before = before, after = after, col = col, id = id, lwd = lwd, xlim = xlim, ylim = ylim, offSet = offSet, path.package("DataViz"))
   }
   else
   {
@@ -39,5 +42,3 @@ throwchart <- function(before, after, col = "#123", id = "", lwd = 2.5, xlim = c
   }
   return(invisible())
 }
-
-

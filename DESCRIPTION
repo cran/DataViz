@@ -1,8 +1,8 @@
 Package: DataViz
 Type: Package
 Title: Data Visualisation Using an HTML Page and 'D3.js'
-Version: 0.2.6
-Date: 2019-05-23
+Version: 0.2.7
+Date: 2019-07-05
 Authors@R: 
     c(person(given = "Timothy",
              family = "Bell",
@@ -20,8 +20,8 @@ LinkingTo: Rcpp
 Depends: tibble
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2019-05-23 15:02:25 UTC; Usr
+Packaged: 2019-07-05 10:09:26 UTC; Usr
 Author: Timothy Bell [aut, cre],
   Christophe Genolini [aut, ths]
 Repository: CRAN
-Date/Publication: 2019-05-23 16:30:10 UTC
+Date/Publication: 2019-07-05 10:20:02 UTC

@@ -11,13 +11,22 @@ var smallest = (minA <= minB) ? minA : minB;
 var biggest = (maxA >= maxB) ? maxA : maxB;
 
 
-x_min = (xMin == xMax) ? smallest : xMin;
-x_max = (xMax == xMin) ? biggest : xMax;
+var x_min = (xMin == xMax) ? smallest : xMin;
+var x_max = (xMax == xMin) ? biggest : xMax;
 
 
-var y_min =  d3.min(data, (d) => parseInt(d.col2)-parseInt(d.col1));
-var y_max =  d3.max(data, (d) => parseInt(d.col2)-parseInt(d.col1));
+var y_min_value = -d3.max(data, (d) => parseInt(d.col2) - parseInt(d.col1));
+var y_max_value =  d3.max(data, (d) => parseInt(d.col2) - parseInt(d.col1));
 
+if (yMin != 0 || yMax != 0)
+{
+    var y_min = yMin;
+    var y_max = yMax;
+}
+else
+{
+
+}
 offSet = parseInt(offSet);
 
 if (offSet < 0 )
@@ -88,38 +97,42 @@ for (let d of data) {
         percent = Math.abs((d.col2 - d.col1)) / (MaxVar),
         summit = halfHeight - halfHeight * percent,
         bottom = halfHeight;
-        console.log(d.col3, summit);
-        console.log("value is above and both positive");
-        if (offSet >0 )
-        {
-            percent = Math.abs((d.col2 - d.col1)) / (y_max),
-            percentBot = (offSet / y_max) * ((y_max - Math.abs((d.col2 - d.col1))) / (y_max - offSet)),
+        if (offSet > 0) {
+            percent = Math.abs((d.col2 - d.col1)) / (y_max_value),
+            percentBot = (offSet / y_max_value) * ((y_max_value - Math.abs((d.col2 - d.col1))) / (y_max_value - offSet)),
             summit = halfHeight - halfHeight * percent + halfHeight * (percentBot),
             bottom = halfHeight;
-            console.log(d.col3, summit);
-            console.log("value is above and both positive");
+        }
+        if (yMin > 0 || yMax > 0)
+        {
+            var y_min_above = (y_min * y_max < 0) ? 0 : y_min;
+            percent = (Math.abs((d.col2 - d.col1)) - y_min_above) / (y_max - y_min_above),
+            percentBot = y_min_above / (y_max - y_min_above),
+            summit = halfHeight - halfHeight * percent,
+            bottom = halfHeight + halfHeight * percentBot;
         }
     }
-      if (d.col2 < d.col1) {
+    if (d.col2 < d.col1) {
         percent = Math.abs((d.col2 - d.col1)) / (MaxVar),
         summit = halfHeight + halfHeight * percent,
         bottom = halfHeight;
-    console.log("Value is under with both positive");
-    if(offSet <0)
-    {
-        percent = Math.abs((d.col2 - d.col1)) / (-y_min),
-        percentBot = (offSet / y_min) * ((-y_min - Math.abs((d.col2 - d.col1))) / (-y_min + offSet)),
-        summit = halfHeight + halfHeight * percent - halfHeight * (percentBot),
-        bottom = halfHeight;
-        console.log(d.col3, y_min, "percentBot", percentBot);
-        console.log('percent', percent);
-        console.log('absolute value', Math.abs((d.col2 - d.col1)));
-        console.log('summit', summit);
-        console.log("both negative");
+        if (offSet < 0) {
+            percent = Math.abs((d.col2 - d.col1)) / (-y_min_value),
+            percentBot = (offSet / y_min_value) * ((-y_min_value - Math.abs((d.col2 - d.col1))) / (-y_min_value + offSet)),
+            summit = halfHeight + halfHeight * percent - halfHeight * (percentBot),
+            bottom = halfHeight;
+        }
+        if (yMin < 0 || yMax < 0) {
+
+            var y_max_under = (y_min * y_max < 0) ? 0 : y_max;
+            percent = (Math.abs((d.col2 - d.col1)) + y_max_under) / (-y_min + y_max_under),
+            percentBot = y_max_under / (y_min - y_max_under),
+            summit = halfHeight + halfHeight * percent,
+            bottom = halfHeight - halfHeight * percentBot;
+        }
     }
-  }
-  console.log(d.col1, x2, d.col3, summit, percent, percentBot);
-  console.log(d.col2 - d.col1,MaxVar);
+    console.log(d.col1, x2, d.col3, summit, percent, percentBot);
+    console.log(d.col2 - d.col1, MaxVar);
 
 
   /**

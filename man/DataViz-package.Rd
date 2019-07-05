@@ -1,4 +1,4 @@
-	\name{DataViz-package}
+\name{DataViz-package}
 \alias{DataViz-package}
 \alias{DataViz}
 \docType{package}

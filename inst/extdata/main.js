@@ -92,17 +92,17 @@
       .attr("width", width / 4)
       .style("stroke", 'none')
       .style("fill", "white");
-    if (offSet < 0)
+    if (offSet < 0 || (yMax <= 0 && yMin < 0))
     {
         var rectTop = svg.append("rect")
           .attr("x",0)
           .attr("y", 0)
           .attr("height", halfHeight)
           .attr("width", width)
-          .style("stroke", 'none')
+          .style("stroke", 'none') 
           .style("fill", "white");
     }
-    if (offSet > 0)
+    if (offSet > 0 || (yMin >=0 && yMax > 0))
     {
         var rectBot = svg.append("rect")
           .attr("x", 0)
