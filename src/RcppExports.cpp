@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// rcpp_forcelayout
+void rcpp_forcelayout(DataFrame schedule, String path);
+RcppExport SEXP _DataViz_rcpp_forcelayout(SEXP scheduleSEXP, SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type schedule(scheduleSEXP);
+    Rcpp::traits::input_parameter< String >::type path(pathSEXP);
+    rcpp_forcelayout(schedule, path);
+    return R_NilValue;
+END_RCPP
+}
 // rcpp_throwchart
 void rcpp_throwchart(List before, List after, List col, List id, List lwd, List xlim, List ylim, int offSet, String path);
 RcppExport SEXP _DataViz_rcpp_throwchart(SEXP beforeSEXP, SEXP afterSEXP, SEXP colSEXP, SEXP idSEXP, SEXP lwdSEXP, SEXP xlimSEXP, SEXP ylimSEXP, SEXP offSetSEXP, SEXP pathSEXP) {
@@ -25,6 +36,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_DataViz_rcpp_forcelayout", (DL_FUNC) &_DataViz_rcpp_forcelayout, 2},
     {"_DataViz_rcpp_throwchart", (DL_FUNC) &_DataViz_rcpp_throwchart, 9},
     {NULL, NULL, 0}
 };

@@ -1,5 +1,8 @@
 throwchart <- function(before, after, col = "#123", id = "", lwd = 2.5, xlim = c(0,0), ylim = c(0,0), offSet = 0, webinteract = TRUE){
-  lengthbefore <- NROW(before)
+  lengthbefore <- NROW(before) ## Creating a length variable to create default params if missing
+  ## using tibble package to create tables to cpp code, for more information ?tibble
+  ## for each parameter check if the value is in tibble format, if not set as tibble
+  ## if tibble is default value set a tibble of length "lengthbefore" with default value
   if(!is_tibble(before)) {
     before <- tibble(before)
     }
@@ -26,19 +29,23 @@ throwchart <- function(before, after, col = "#123", id = "", lwd = 2.5, xlim = c
   if(NROW(id) == 1){
     id <- tibble(rep(id,lengthbefore))
   }
+  ## Webinteract param is to detect if user wishes to use package in interactive mode or not
   if(webinteract)
   {
+    ## if webinteract then transform as tibble (even though it is not an array, for the sake of simplicity)
     if(!is_tibble(xlim)) {
       xlim <- tibble(xlim)
-    }
+    }  
     if(!is_tibble(ylim)) {
       ylim <- tibble(ylim)
-    }
+    }  
     rcpp_throwchart(before = before, after = after, col = col, id = id, lwd = lwd, xlim = xlim, ylim = ylim, offSet = offSet, path.package("DataViz"))
   }
   else
   {
-    r_throwchart(before = before, after = after, col = "blue", lwd = lwd, xlim = c(0,0), ylim = c(0,0), offSet = offSet)
+    r_throwchart(before = before, after = after, col = col, lwd = lwd, xlim = xlim, ylim = ylim, offSet = offSet)
   }
   return(invisible())
 }
+
+

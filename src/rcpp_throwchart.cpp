@@ -6,9 +6,14 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+
+/**
+ * When sending to the cpp code, a better way would be re-using the existing code in Rpp (JsWriter, DataValidator, etc.)
+ */
+
 // [[Rcpp::export]]
 void rcpp_throwchart(List before,List after,List col,List id,List lwd,  List xlim, List ylim, int offSet, String path){
-  NumericVector before_local = as<NumericVector>(before[0]);
+  NumericVector before_local = as<NumericVector>(before[0]);/** because of the structure of R code, variables have to be set as numeric for Cpp to understand */
   NumericVector after_local = as<NumericVector>(after[0]);
   StringVector col_local = as<StringVector>(col[0]);
   StringVector id_local = as<StringVector>(id[0]);
@@ -22,6 +27,10 @@ void rcpp_throwchart(List before,List after,List col,List id,List lwd,  List xli
 
   Rcout << path_local.get_cstring() << std::endl;  
   path_local += "/extdata/data.js";
+  
+  /**
+   * Writing in a .js file, names, limits, offset, iterating thought before and after
+   */
   
   myfile.open(path_local.get_cstring());
   myfile << "names1 = \"" << 1 << "\";" << std::endl;
@@ -40,7 +49,9 @@ void rcpp_throwchart(List before,List after,List col,List id,List lwd,  List xli
   myfile.close();
   
   path_local += "/../index.html";
-  system(path_local.get_cstring());
+  if (system(path_local.get_cstring()) != 2)
+  {
+  } 
 }
 
 

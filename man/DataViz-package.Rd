@@ -32,6 +32,7 @@ Maintainer: Timothy Bell <horia.yeb@gmail.com>
 
 \seealso{
   \link{throwchart}
+  \link{forcelayout}
 }
 
 \examples{
